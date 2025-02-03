@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/styleIndex.css">
+    <script src="/socket.io/socket.io.js" ></script>
+    <script src="script/roomGestion.js" defer></script>
+    <title>Acceuil</title>
+</head>
+    <body>
+        <main>
+            <div id="connexion">
+                <form id="formulaire">
+                    <label for="pseudo"> Pseudo :</label>
+                    <input type="text" id="pseudo" required>
+                    <label for="roomId">ID :</label>
+                    <input type="text" id="roomId">
+                    <button type="submit">Rejoindre</button>
+                    <p>L'ID est optionnel et doit faire exactement 5 charachtères !</p>
+                </form>
+            </div>
+
+            <div id="wait" class="caché">
+                <p>Attente d'un adversaire</p>
+                <div class="loading-circle"></div>
+            </div>
+        </main>
+    </body>
+</html>

@@ -1,0 +1,152 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+body {
+    text-align: center;
+}
+
+header {
+    background-color: #147297;
+    color: antiquewhite;
+    text-align: center;
+    padding: 10px 0;
+    margin: 0;
+    height: 60px;
+}
+
+footer {
+    height: 50px;
+    text-align: center;
+    background-color: rgb(36, 37, 41);
+    color: antiquewhite;
+    width: 100%;
+    padding: 10px 0;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 110px);
+    padding: 0 20px;
+    flex-direction: column;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 50px;
+}
+
+#ship-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 200px;
+}
+
+.ship {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 40px;
+    background-color: lightblue;
+    border: 2px solid navy;
+    cursor: pointer;
+    transition: 0.2s;
+    border-radius: 8px;
+}
+
+.ship[boat="posed"] {
+    background-color: rgba(255, 0, 0, 0.5);
+    border: 2px solid rgb(255, 0, 0);
+}
+
+.ship:hover {
+    transform: scale(1.1);
+}
+
+.game {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.bataille-navale {
+    border-collapse: collapse;
+}
+
+.bataille-navale td,
+.bataille-navale th {
+    border: 1px solid black;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+}
+
+.bataille-navale .header {
+    background-color: #f0f0f0;
+    font-weight: bold;
+}
+
+.bataille-navale td {
+    background-color: #fff;
+}
+
+button[fonction="jeu"] {
+    display: block; /* Évite les espaces en mode inline-block */
+    height: 100%;
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    line-height: 1; /* Évite les espaces liés à la hauteur de ligne */
+    font-size: 0; /* Évite les espaces liés au texte par défaut */
+    box-sizing: border-box; /* S'assure que le bouton respecte les dimensions de la cellule */
+}
+
+
+button[boat="preview"] {
+    background-color: rgba(0, 123, 255, 0.5);
+}
+
+button[boat="error"] {
+    background-color: rgba(255, 0, 0, 0.5);
+}
+
+button[boat="validate"] {
+    background-color: rgba(0, 255, 179, 0.6);
+}
+
+#submit-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #0078d7;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+  
+#submit-btn:hover {
+    background-color: #005ea2;
+    transform: scale(0.98);
+}
+
+td {
+    margin: 0px;
+    padding: 0px;
+    border-spacing: 0; /* Supprime les espaces entre les cellules */
+}
