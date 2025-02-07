@@ -44,26 +44,35 @@ io.on('connection', (socket) => {
             room = createRoom(player)
             console.log(`[create room] => ${room.id} - ${player.username}`);
             socket.join(room.id);
-        } else if (rooms.some(room => room.id === player.roomId)) { //condition pas comprise
+        } else if (rooms.some((room) => room.id === player.roomId)) { //vérifie si un id de rooms est égal à player.id
             console.log(`[room Join] => ${player.username} Join "${player.roomId}"`);
             
             rooms.forEach((room) => {
-                if (player.roomId == room.id) {
-                    console.log(room);
-                                       
+                if (player.roomId == room.id) {                                       
                     room.player.push(player.username);
                     socket.join(room.id);
                     io.to(room.id).emit('selectBoat', room.id);
                 }
             })
         } else {
-            console.log("2");
             let room = {id: player.roomId, player: []};
             room.player.push(player.username);
             rooms.push(room);
             socket.join(room.id);
         }
         console.log(rooms);
+    })
+
+    socket.on('playerReady', (player) => {
+        const playerIndex = rooms.findIndex(room => room.player && room.player.includes(player.username));
+        const room = rooms[playerIndex];        
+        if (room.playerReady != null) {
+            room.playerReady = 2;
+            io.to(room.id).emit('startGame')
+            console.log(`[partie lancé] => ${room.id}`);
+        } else {
+            room.playerReady = 1;
+        }
     })
 })
 

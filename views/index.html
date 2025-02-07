@@ -3,14 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style/style.css">
-    <link rel="stylesheet" href="style/styleIndex.css">
+    <link  id="selectionPage"rel="stylesheet" href="style/style.css" disabled>
+    <link id="rooms" rel="stylesheet" href="style/styleIndex.css">
     <script src="/socket.io/socket.io.js" ></script>
+    <script src="script/génerationtab.js" defer></script>
+    <script src="script/dropShip.js" defer></script>
     <script src="script/roomGestion.js" defer></script>
-    <title>Acceuil</title>
+    <script src="script/main.js" defer></script>
+    <title>Bataille Navale</title>
 </head>
     <body>
+        <header>
+            <h1>Bataille Navale</h1>
+        </header>
+
         <main>
+            <!-- PAGGE D'ACCEUIL -->
             <div id="connexion">
                 <form id="formulaire">
                     <label for="pseudo"> Pseudo :</label>
@@ -23,9 +31,44 @@
             </div>
 
             <div id="wait" class="caché">
-                <p>Attente d'un adversaire</p>
+                <p>Attente de l'adversaire</p>
+                <p>Room iD : <span id="rId"></span></p>
                 <div class="loading-circle"></div>
             </div>
+
+
+            <!-- SELECTION DES BATEAUX -->
+            <div id="selection">
+                <div id="selectBoat">
+                    <div id="ship-list">
+                        <div class="ship" id="porteAvion" data-size="5">⛴️ Porte-avions</div>
+                        <div class="ship" id="cuirasse" data-size="4">🚢 Cuirassé</div>
+                        <div class="ship" id="croiseur" data-size="3">🛥️ Croiseur</div>
+                        <div class="ship" id="sousMarin" data-size="3">🚤 Sous-marin</div>
+                        <div class="ship" id="destroyer" data-size="2">🛶 Destroyer</div>
+                    </div>
+                    
+                    <div class="game">
+                        <div id="boat"></div>
+                        <div id="player">
+                            <div class="title">Posez vos bateau !</div>
+                            <table class="bataille-navale">
+                                <thead></thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div> 
+                </div>
+                <div id="validateBtn">
+                    <p></p>
+                    <button id="submit-btn">Valider la flotte</button>
+                </div>
+            </div>
         </main>
+
+        <footer>
+            <a href="https://archlinux.org/" target="_blank">Mentions Légales</a>
+            <p>Pas de triche sinon Ban PERM !!!</p>
+        </footer>
     </body>
 </html>

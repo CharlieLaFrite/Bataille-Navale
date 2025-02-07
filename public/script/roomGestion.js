@@ -12,9 +12,12 @@ const playerName = document.getElementById("pseudo")
 const connexion = document.getElementById("connexion");
 const attente = document.getElementById("wait");
 const roomId = document.getElementById("roomId");
+const selectBoat = document.getElementById("selection");
+const rId = document.getElementById("rId");
 
-
+// On cache les elements innutiles
 attente.hidden = true;
+selectBoat.hidden = true;
 
 
 form.addEventListener('submit', (e) => {
@@ -30,12 +33,25 @@ form.addEventListener('submit', (e) => {
     } else {
         player.roomId = roomId.value.trim();
     }
-    socket.emit('playerData', player)
-    console.log(player);
+    socket.emit('playerData', player);
+    rId.innerHTML = player.roomId;
 })
 
 socket.on('selectBoat', (id) => {
-    window.location.href = "/initialisation"
-    console.log("opiaudoiajh");
-    
+    document.getElementById("selectionPage").disabled = false;
+    document.getElementById("rooms").disabled = true;    
+    attente.hidden = true;
+    selectBoat.hidden = false;
 })
+
+socket.on('startGame', () => {
+    attente.hidden = true;
+    startGame();
+})
+
+function playerReady() {
+    console.log("lance bros");
+    socket.emit('playerReady', player)
+    selectBoat.hidden = true;
+    attente.hidden = false;
+}

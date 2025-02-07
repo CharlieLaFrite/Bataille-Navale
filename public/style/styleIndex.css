@@ -11,6 +11,10 @@ body {
     background-color: #f0f0f0;
 }
 
+header, footer{
+    display: none;
+}
+
 #formulaire {
     display: flex;
     flex-direction: column;
@@ -47,7 +51,6 @@ body {
     align-self: center; /* Centre le bouton horizontalement */
 }
 
-
 #formulaire button:hover {
     background-color: #005bb5;
     transform: scale(0.99);
@@ -76,6 +79,7 @@ body {
 
 #wait p {
     font-size: 23px;
+    text-align: center;
 }
 
 /* Animation de rotation */

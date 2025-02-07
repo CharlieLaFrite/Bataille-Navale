@@ -65,7 +65,11 @@ function putListner() {
 
   //Pour envoyer le formulaire
   document.getElementById('submit-btn').addEventListener('click', () => {
-    console.log("ouiuii redfirecte");
+    if (checkBoat()) {
+      playerReady();
+    } else {
+      document.querySelector('#validateBtn p').innerHTML = "Dispostion des bateaux incorrecte !"
+    }
     
   })
 }
@@ -119,4 +123,13 @@ function preview(size, btnClass, horizontale, preview) {
 function coord(clas) {
   let match = clas.match(/cell-(\d{1,2})_(\d{1,2})/);  // Expression régulière qui récupère 1 ou 2 chiffre pour X et Y
   return [parseInt(match[1]), parseInt(match[2])];  // Renvoie [x, y]
+}
+
+function checkBoat() {
+  let nbBoat = 0;
+  document.querySelectorAll('[boat="validate"]').forEach(() => {
+    nbBoat++;
+  })
+  return nbBoat === 17;
+
 }
