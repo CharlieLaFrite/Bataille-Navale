@@ -19,7 +19,7 @@ const rId = document.getElementById("rId");
 attente.hidden = true;
 selectBoat.hidden = true;
 
-
+// Gere l'envoie des données du formulaire au serveur
 form.addEventListener('submit', (e) => {
     e.preventDefault();
     player.username = playerName.value;
@@ -37,6 +37,7 @@ form.addEventListener('submit', (e) => {
     rId.innerHTML = player.roomId;
 })
 
+// Gère quand le joueur doit selectionenr ses bateaux
 socket.on('selectBoat', (id) => {
     document.getElementById("selectionPage").disabled = false;
     document.getElementById("rooms").disabled = true;    
@@ -44,14 +45,20 @@ socket.on('selectBoat', (id) => {
     selectBoat.hidden = false;
 })
 
+// Gère le lancement de la patie
 socket.on('startGame', () => {
     attente.hidden = true;
-    startGame();
 })
 
+// Une fois que le formulaire à été envoyé au serveur
 function playerReady() {
-    console.log("lance bros");
     socket.emit('playerReady', player)
     selectBoat.hidden = true;
     attente.hidden = false;
 }
+
+// donne le oom id au client quand il à créé une room sans le renseigner
+socket.on('roomId', (room) => {  
+    player.roomId = room.id;
+    rId.innerHTML = player.roomId;
+})
