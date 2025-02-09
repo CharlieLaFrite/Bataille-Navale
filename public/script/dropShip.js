@@ -1,5 +1,15 @@
 let validShip = false;
 let newShip = false;
+let boatPosition = [['.', '.', '.', '.', '.', '.', '.', '.', '.', '.'],
+                   ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.'],
+                   ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.'],
+                   ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.'],
+                   ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.'], 
+                   ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.'],
+                   ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.'],
+                   ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.'],
+                   ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.'],
+                   ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.']];
 
 function putListner() {
   let selectedShip = null;
@@ -66,6 +76,8 @@ function putListner() {
   //Pour envoyer le formulaire
   document.getElementById('submit-btn').addEventListener('click', () => {
     if (checkBoat()) {
+      console.log(boatPosition);
+      
       playerReady();
     } else {
       document.querySelector('#validateBtn p').innerHTML = "Dispostion des bateaux incorrecte !"
@@ -108,14 +120,16 @@ function preview(size, btnClass, horizontale, preview) {
       let coordX = horizontale ? x + i : x;
       let coordY = horizontale ? y : y + i;
       let button = document.querySelector(`.cell-${coordY}_${coordX} button`);
-      if (button.getAttribute('boat') == 'validate') {
+      if (button.getAttribute('boat') == 'validate') {        
         tempPreview = "validate";
       }
-      button.setAttribute("boat", tempPreview);
+      button.setAttribute("boat", tempPreview);      
       if (preview != "validate") {
         tempPreview = preview;
+      } else {
+        boatPosition[coordY-1][coordX-1] = 'X'; // Place les coordonées du bateau dans la grille
       }
-    } catch {}
+    } catch {}   
   }
 }
 
@@ -131,5 +145,4 @@ function checkBoat() {
     nbBoat++;
   })
   return nbBoat === 17;
-
 }

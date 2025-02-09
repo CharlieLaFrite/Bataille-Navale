@@ -50,7 +50,7 @@ socket.on('startGame', () => {
     attente.hidden = true;
 })
 
-// Une fois que le formulaire à été envoyé au serveur
+// Une fois que la grille de bateau à été envoyé au serveur et est complete
 function playerReady() {
     socket.emit('playerReady', player)
     selectBoat.hidden = true;
