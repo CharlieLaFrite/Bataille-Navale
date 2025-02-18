@@ -77,7 +77,6 @@ function putListner() {
   document.getElementById('submit-btn').addEventListener('click', () => {
     if (checkBoat()) {
       console.log(boatPosition);
-      
       playerReady();
     } else {
       document.querySelector('#validateBtn p').innerHTML = "Dispostion des bateaux incorrecte !"

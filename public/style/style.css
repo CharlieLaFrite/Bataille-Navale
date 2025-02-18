@@ -107,11 +107,19 @@ main {
     transform: scale(1.1);
 }
 
-.game {
+.boat {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.game {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 50px; /* Espace entre les grilles */
 }
 
 .bataille-navale {
@@ -183,3 +191,7 @@ td {
     padding: 0px;
     border-spacing: 0; /* Supprime les espaces entre les cellules */
 }
+
+[hidden] {
+    display: none !important;
+} /* Permet de cacher meme les div qui ont un display: flex*/

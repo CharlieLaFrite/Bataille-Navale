@@ -48,16 +48,22 @@ socket.on('selectBoat', (id) => {
 // Gère le lancement de la patie
 socket.on('startGame', () => {
     attente.hidden = true;
+    selectBoat.hidden = false;
+    document.getElementById("ship-list").hidden = true;
+    document.querySelector(".title").innerHTML = "Vos Bateaux !";
+    document.getElementById("validateBtn").hidden = true;
+    genererTab(true);
+    document.querySelector(".titleAdv").innerHTML = "Grille de l'adversaire !";
 })
 
 // Une fois que la grille de bateau à été envoyé au serveur et est complete
-function playerReady() {
+function playerReady(grille) {
     socket.emit('playerReady', player)
     selectBoat.hidden = true;
     attente.hidden = false;
 }
 
-// donne le oom id au client quand il à créé une room sans le renseigner
+// donne le room id au client quand il à créé une room sans le renseigner
 socket.on('roomId', (room) => {  
     player.roomId = room.id;
     rId.innerHTML = player.roomId;
