@@ -14,6 +14,7 @@ const attente = document.getElementById("wait");
 const roomId = document.getElementById("roomId");
 const selectBoat = document.getElementById("selection");
 const rId = document.getElementById("rId");
+const copier = document.getElementById("copier");
 
 // On cache les elements innutiles
 attente.hidden = true;
@@ -37,6 +38,13 @@ form.addEventListener('submit', (e) => {
     rId.innerHTML = player.roomId;
 })
 
+// Gère le boutons pour copier le room id
+copier.addEventListener('click', () => {
+    navigator.clipboard.writeText(player.roomId).then(() => {
+        document.getElementById("copier").innerHTML = "Copié !";
+    });
+})
+
 // Gère quand le joueur doit selectionenr ses bateaux
 socket.on('selectBoat', (id) => {
     document.getElementById("selectionPage").disabled = false;
@@ -54,6 +62,8 @@ socket.on('startGame', () => {
     document.getElementById("validateBtn").hidden = true;
     genererTab(true);
     document.querySelector(".titleAdv").innerHTML = "Grille de l'adversaire !";
+    const texte = player.turn ? "Votre tour de jouer !" : "C'est au tour de l'adversaire !";
+    document.querySelector(".turn").innerHTML = texte;
 })
 
 // Une fois que la grille de bateau à été envoyé au serveur et est complete

@@ -35,8 +35,13 @@
                 <p>Attente de l'adversaire</p>
                 <p>Room iD : <span id="rId"></span></p>
                 <div class="loading-circle"></div>
+                <button id="copier">Copier</button>
             </div>
 
+            <!-- Texte qui indique à qui c'est le tour de jouer -->
+            <div id="turn">
+                <p class="turn"></p>
+            </div>
 
             <!-- Selection des bateaux -->
             <div id="selection">
@@ -48,9 +53,14 @@
                         <div class="ship" id="sousMarin" data-size="3">🚤 Sous-marin</div>
                         <div class="ship" id="destroyer" data-size="2">🛶 Destroyer</div>
                     </div>
-                    
+
+                    <!-- Gère le jeu, permet d'abbord la sélection des bateaux, puis l'affichage de l'adversaire une fois la partie lancé -->
                     <div class="game">
+
+                        <!-- Menu pour la liste des bateaux à poser -->
                         <div id="boat"></div>
+
+                        <!-- Grille ou apparaissent les bateaux du joueur -->
                         <div id="player">
                             <div class="title">Posez vos bateau !</div>
                             <table class="bataille-navale">
@@ -58,6 +68,8 @@
                                 <tbody></tbody>
                             </table>
                         </div>
+
+                        <!-- Grille de jeu de l'adversaire -->
                         <div id="adversaire">
                             <div class="titleAdv"></div>
                             <table class="bataille-navale">
@@ -67,6 +79,8 @@
                         </div>
                     </div> 
                 </div>
+
+                <!-- Le boutons pour valider -->
                 <div id="validateBtn">
                     <p></p>
                     <button id="submit-btn">Valider la flotte</button>
