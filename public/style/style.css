@@ -143,7 +143,7 @@ main {
     background-color: #fff;
 }
 
-button[fonction="jeu"] {
+button[fonction="jeu"], button[fonction="adv"]{
     display: block; /* Évite les espaces en mode inline-block */
     height: 100%;
     width: 100%;

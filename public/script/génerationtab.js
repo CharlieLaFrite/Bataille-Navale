@@ -5,13 +5,15 @@ function genererTab(adv) {
     let topp = document.createElement("tr");
     let th = document.createElement("th");
     let cell = "cell-";
+    let role = "jeu";
 
     if (adv) {
         theadList = document.querySelectorAll("thead");
         tbodyList = document.querySelectorAll("tbody");
         thead = theadList[theadList.length - 1];
         tbody = tbodyList[tbodyList.length - 1];
-        //cell = "cellA-";
+        cell = "Acell-"
+        role = "adv";
     }
     th.innerHTML = " ";
     topp.appendChild(th);
@@ -35,7 +37,7 @@ function genererTab(adv) {
             } else {
                 let td = document.createElement("td");
                 let btn = document.createElement("button");
-                btn.setAttribute("fonction", "jeu");
+                btn.setAttribute("fonction", role);
                 td.classList.add(cell + String(i+1) + "_" + String(x));
                 td.appendChild(btn);
                 topp.appendChild(td);

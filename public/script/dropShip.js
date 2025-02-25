@@ -31,7 +31,7 @@ function putListner() {
   });
 
   // Boucle sur toutes les cellules du tableau
-  document.querySelectorAll('button[fonction="jeu"]').forEach(cell => {
+  document.querySelectorAll('button[fonction="jeu"]').forEach((cell) => {
     // Evenement à l'entré de la souris
     cell.addEventListener('mouseenter', (e) => {
       if (selectedShip) {
@@ -65,7 +65,8 @@ function putListner() {
     });
 
   // Gestion de la rotation des bateau
-  document.addEventListener('keydown', () => {
+  document.addEventListener('contextmenu', (e) => {
+    e.preventDefault();
     if (lastButton) {
       preview(selectedShip["size"], lastButton, horizontale, "none");
       horizontale = !horizontale;
@@ -134,7 +135,7 @@ function preview(size, btnClass, horizontale, preview) {
 
 // Renvoie les coord X et Y gràce à la classe d'une cellules
 function coord(clas) {
-  let match = clas.match(/cell-(\d{1,2})_(\d{1,2})/);  // Expression régulière qui récupère 1 ou 2 chiffre pour X et Y
+  let match = clas.match(/(?:A)?cell-(\d{1,2})_(\d{1,2})/);  // Expression régulière qui récupère 1 ou 2 chiffre pour X et Y
   return [parseInt(match[1]), parseInt(match[2])];  // Renvoie [x, y]
 }
 

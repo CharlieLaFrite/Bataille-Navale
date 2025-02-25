@@ -64,6 +64,7 @@ socket.on('startGame', () => {
     document.querySelector(".titleAdv").innerHTML = "Grille de l'adversaire !";
     const texte = player.turn ? "Votre tour de jouer !" : "C'est au tour de l'adversaire !";
     document.querySelector(".turn").innerHTML = texte;
+    putAdversListner();
 })
 
 // Une fois que la grille de bateau à été envoyé au serveur et est complete
@@ -71,6 +72,8 @@ function playerReady(grille) {
     socket.emit('playerReady', player)
     selectBoat.hidden = true;
     attente.hidden = false;
+    // Enlève le roomId et le bouton copier
+    document.querySelectorAll(".temp").forEach((element) => {element.hidden = true});
 }
 
 // donne le room id au client quand il à créé une room sans le renseigner

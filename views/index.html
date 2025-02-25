@@ -6,9 +6,10 @@
     <link  id="selectionPage"rel="stylesheet" href="style/style.css" disabled>
     <link id="rooms" rel="stylesheet" href="style/styleIndex.css">
     <script src="/socket.io/socket.io.js" ></script>
+    <script src="script/roomGestion.js" defer></script>
+    <script src="script/game.js"></script>
     <script src="script/génerationtab.js" defer></script>
     <script src="script/dropShip.js" defer></script>
-    <script src="script/roomGestion.js" defer></script>
     <script src="script/main.js" defer></script>
     <title>Bataille Navale</title>
 </head>
@@ -33,9 +34,9 @@
             <!-- Rond d'atente -->
             <div id="wait" class="caché">
                 <p>Attente de l'adversaire</p>
-                <p>Room iD : <span id="rId"></span></p>
+                <p class="temp">Room iD : <span id="rId"></span></p>
                 <div class="loading-circle"></div>
-                <button id="copier">Copier</button>
+                <button class="temp" id="copier">Copier</button>
             </div>
 
             <!-- Texte qui indique à qui c'est le tour de jouer -->
@@ -62,7 +63,7 @@
 
                         <!-- Grille ou apparaissent les bateaux du joueur -->
                         <div id="player">
-                            <div class="title">Posez vos bateau !</div>
+                            <div class="title">=> Click gauche pour posez vos bateau et click droit pour les orienter !!!</div>
                             <table class="bataille-navale">
                                 <thead></thead>
                                 <tbody></tbody>
