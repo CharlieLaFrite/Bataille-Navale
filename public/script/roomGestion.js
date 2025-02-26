@@ -1,10 +1,12 @@
 const socket = io();
 
 let player = {
+    name: null,
     host: false,
     roomId: null,
     socketId: null,
-    turn: false
+    turn: false,
+    lastCible: null
 }
 
 const form = document.getElementById("formulaire");
@@ -25,6 +27,7 @@ form.addEventListener('submit', (e) => {
     e.preventDefault();
     player.username = playerName.value;
     player.socketId = socket.id;
+    player.name = playerName.value;
     connexion.hidden = true;
     attente.hidden = false;
     
@@ -69,7 +72,9 @@ socket.on('startGame', () => {
 
 // Une fois que la grille de bateau à été envoyé au serveur et est complete
 function playerReady(grille) {
-    socket.emit('playerReady', player)
+    console.log(grille);
+    
+    socket.emit('playerReady', {player, grille})
     selectBoat.hidden = true;
     attente.hidden = false;
     // Enlève le roomId et le bouton copier
@@ -80,4 +85,30 @@ function playerReady(grille) {
 socket.on('roomId', (room) => {  
     player.roomId = room.id;
     rId.innerHTML = player.roomId;
+})
+
+// Envoie un missile sur la grille
+function missile(cible) {
+    player.lastCible = cible;
+    let [y, x] = coord(cible); // Extraction des coordonnées
+    let p = player.name;
+    console.log(cible, " x => ", x, "y => ", y);
+    
+    socket.emit('shoot', {x, y, p});
+}
+
+// Quand le missile à touché le bateau 
+socket.on('BoatTouched', () => {
+    document.querySelector(`.${player.lastCible} button`).setAttribute("boat", "touched");
+})
+
+// Quand le missile n'as pas touché de bateau
+socket.on('BoatMissed', () => {
+    document.querySelector(`.${player.lastCible} button`).setAttribute("boat", "missed");
+})
+
+socket.on('changeTurn', () => {
+    player.turn = !player.turn;
+    texte = player.turn ? "Votre tour de jouer !" : "C'est au tour de l'adversaire !";
+    document.querySelector(".turn").innerHTML = texte;
 })

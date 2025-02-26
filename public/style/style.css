@@ -169,6 +169,14 @@ button[boat="validate"] {
     background-color: rgba(0, 255, 179, 0.6);
 }
 
+button[boat="missed"] {
+    background-color: rgba(22, 27, 33, 0.2);
+}
+
+button[boat="touched"] {
+    background-color: rgba(146, 41, 15, 0.5);
+}
+
 #submit-btn {
     margin-top: 20px;
     padding: 10px 20px;

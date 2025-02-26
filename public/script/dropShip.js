@@ -77,8 +77,7 @@ function putListner() {
   //Pour envoyer le formulaire
   document.getElementById('submit-btn').addEventListener('click', () => {
     if (checkBoat()) {
-      console.log(boatPosition);
-      playerReady();
+      playerReady(boatPosition);
     } else {
       document.querySelector('#validateBtn p').innerHTML = "Dispostion des bateaux incorrecte !"
     }
