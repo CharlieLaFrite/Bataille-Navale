@@ -1,3 +1,9 @@
+//Script qui gère la connexion avec le Serveur et appel les différents fonctions
+
+// Format des cellules de la grille du joueur : .cell-7_8
+// Format des cellules de la grille adversaire : .Acell-5_9
+
+
 const socket = io();
 
 let player = {
@@ -21,6 +27,23 @@ const copier = document.getElementById("copier");
 // On cache les elements innutiles
 attente.hidden = true;
 selectBoat.hidden = true;
+
+// Envoie un missile sur la grille
+function missile(cible) {
+    player.lastCible = cible;
+    let [y, x] = coord(cible); // Extraction des coordonnées
+    let p = player.name;
+    socket.emit('shoot', {x, y, p});
+}
+
+// Une fois que la grille de bateau à été envoyé au serveur et est complete
+function playerReady(grille) {    
+    socket.emit('playerReady', {player, grille})
+    selectBoat.hidden = true;
+    attente.hidden = false;
+    // Enlève le roomId et le bouton copier
+    document.querySelectorAll(".temp").forEach((element) => {element.hidden = true});
+}
 
 // Gere l'envoie des données du formulaire au serveur
 form.addEventListener('submit', (e) => {
@@ -49,7 +72,7 @@ copier.addEventListener('click', () => {
 })
 
 // Gère quand le joueur doit selectionenr ses bateaux
-socket.on('selectBoat', (id) => {
+socket.on('selectBoat', () => {
     document.getElementById("selectionPage").disabled = false;
     document.getElementById("rooms").disabled = true;    
     attente.hidden = true;
@@ -70,45 +93,40 @@ socket.on('startGame', () => {
     putAdversListner();
 })
 
-// Une fois que la grille de bateau à été envoyé au serveur et est complete
-function playerReady(grille) {
-    console.log(grille);
-    
-    socket.emit('playerReady', {player, grille})
-    selectBoat.hidden = true;
-    attente.hidden = false;
-    // Enlève le roomId et le bouton copier
-    document.querySelectorAll(".temp").forEach((element) => {element.hidden = true});
-}
-
 // donne le room id au client quand il à créé une room sans le renseigner
 socket.on('roomId', (room) => {  
-    player.roomId = room.id;
+    player.roomId = room.room.id;
+    player.turn = room.turn;
     rId.innerHTML = player.roomId;
 })
 
-// Envoie un missile sur la grille
-function missile(cible) {
-    player.lastCible = cible;
-    let [y, x] = coord(cible); // Extraction des coordonnées
-    let p = player.name;
-    console.log(cible, " x => ", x, "y => ", y);
-    
-    socket.emit('shoot', {x, y, p});
-}
-
 // Quand le missile à touché le bateau 
-socket.on('BoatTouched', () => {
-    document.querySelector(`.${player.lastCible} button`).setAttribute("boat", "touched");
+socket.on('BoatTouched', (coord) => {
+    if (coord.p == player.name) {
+        document.querySelector(`.${player.lastCible} button`).setAttribute("boat", "touched");
+    } else {
+        document.querySelector(`.cell-${coord.y}_${coord.x} button`).setAttribute("boat", "touched");
+    }
 })
 
 // Quand le missile n'as pas touché de bateau
-socket.on('BoatMissed', () => {
-    document.querySelector(`.${player.lastCible} button`).setAttribute("boat", "missed");
+socket.on('BoatMissed', (coord) => {
+    if (coord.p == player.name) {
+        document.querySelector(`.${player.lastCible} button`).setAttribute("boat", "missed");
+    } else {
+        document.querySelector(`.cell-${coord.y}_${coord.x} button`).setAttribute("boat", "missed");
+    }
 })
 
+// Pour changer le tour
 socket.on('changeTurn', () => {
     player.turn = !player.turn;
     texte = player.turn ? "Votre tour de jouer !" : "C'est au tour de l'adversaire !";
     document.querySelector(".turn").innerHTML = texte;
+})
+
+// Quand la partie est fini
+socket.on('gameFinish', (playerr) => {    
+    alert(`${playerr} a gagné la partie, gors gg à lui`);
+    location.reload();
 })

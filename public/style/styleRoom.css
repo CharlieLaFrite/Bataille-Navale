@@ -1,19 +1,23 @@
+/* 
+    Fichier de style pour la partie lancement avec le choix des rooms.
+*/
+
+/* ---------- Styles généraux ---------- */
+
 body {
-    background-image: url('../assets/wallpaper.jpg');
-    background-size: cover; /* Ajuste l'image pour couvrir toute la page */
-    background-position: center; /* Centre l'image */
-    background-repeat: no-repeat; /* Empêche la répétition de l'image */
+    background: #f0f0f0 url('../assets/wallpaper.jpg') center/cover no-repeat; /* Fond avec image */
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-color: #f0f0f0;
 }
 
-header, footer{
-    display: none;
+header, footer {
+    display: none; /* Cache le header et le footer */
 }
+
+/* ---------- Formulaire de connexion ---------- */
 
 #formulaire {
     display: flex;
@@ -27,8 +31,8 @@ header, footer{
 }
 
 #formulaire label {
-    margin-bottom: 5px;
     font-size: 30px;
+    margin-bottom: 5px;
 }
 
 #formulaire input {
@@ -38,7 +42,9 @@ header, footer{
     border-radius: 4px;
 }
 
+/* Bouton de validation */
 #formulaire button {
+    align-self: center; /* Centre le bouton horizontalement */
     margin-top: 15px;
     padding: 10px 15px;
     font-size: 16px;
@@ -48,7 +54,6 @@ header, footer{
     border-radius: 4px;
     cursor: pointer;
     transition: 0.2s;
-    align-self: center; /* Centre le bouton horizontalement */
 }
 
 #formulaire button:hover {
@@ -56,34 +61,36 @@ header, footer{
     transform: scale(0.99);
 }
 
+/* ---------- Attente du lancement ---------- */
+
 #wait {
+    text-align: center;
     flex-direction: column;
-    padding: 0px 40px;
+    padding: 0 40px;
     border: 1px solid #ccc;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     background-color: #f9f9f9;
-    text-align: center;
-}
-
-/* Le cercle de chargement */
-.loading-circle {
-    width: 50px;
-    height: 50px;
-    border: 5px solid rgba(0, 0, 0, 0.1); /* Couleur de fond du cercle */
-    border-top: 5px solid #3498db; /* Couleur animée */
-    border-radius: 50%;
-    margin: auto;
-    margin-bottom: 20px;
-    animation: spin 1s linear infinite; /* Animation */
 }
 
 #wait p {
     font-size: 23px;
-    text-align: center;
 }
 
-/* Animation de rotation */
+/* ---------- Animation de chargement ---------- */
+
+.loading-circle {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(0, 0, 0, 0.1); /* Cercle de fond */
+    border-top: 5px solid #3498db; /* Couleur animée */
+    border-radius: 50%;
+    margin: 20px auto; /* Centre horizontalement et ajoute un espace en haut */
+    display: block; /* Assure le bon centrage */
+    animation: spin 1s linear infinite;
+}
+
+
 @keyframes spin {
     0% {
         transform: rotate(0deg);
@@ -93,6 +100,8 @@ header, footer{
     }
 }
 
+/* ---------- Bouton de copie ---------- */
+
 #copier {
     height: 35px;
     width: 90px;
@@ -100,9 +109,9 @@ header, footer{
     background: #147297;
     border: none;
     border-radius: 5px;
-    margin-left: 10px;
-    margin-top: 5px;
-    margin-bottom: 15px;
-} #copier:hover {
+    margin: 5px 0 15px 10px;
+}
+
+#copier:hover {
     background: rgb(36, 37, 41);
 }
